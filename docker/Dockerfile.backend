@@ -1,18 +1,19 @@
 FROM oven/bun:1
 
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 WORKDIR /usr/src/app
 
 COPY ./packages ./packages
-COPY ./bun.lock ./bun.lock
 
-COPY ./package.json ./package.json
-COPY ./turbo.json ./turbo.json
-
-COPY ./apps/backend ./apps/backend
+COPY ./apps/backend .
 
 RUN bun install
-RUN bun run db:generate
+RUN cd ./packages/db && bun install
+# RUN cd ./packages/db && bunx prisma generate --debug
 
 EXPOSE 8080
 
-CMD ["bun", "run", "start:backend"]
+CMD ["sh", "-c", "echo STARTING && cd packages/db && ls && bunx prisma generate && cd ../.. && ls && bun run index.ts && pws && ls"]
+

@@ -5,6 +5,11 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
+  "scripts": {
+    "db:generate": "cd ./packages/db && npx prisma generate",
+    "start:web": "cd apps/web && bun run start",
+    "start:backend": "bun run index.ts"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
