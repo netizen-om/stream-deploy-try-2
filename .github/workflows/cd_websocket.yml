@@ -1,4 +1,4 @@
-name: CD Backend 
+name: CD Websocket
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./docker/Dockerfile.backend
+          file: ./docker/Dockerfile.ws
           push: true
           tags: |
-            netizenom/monorepo-backend:latest
-            netizenom/monorepo-backend:${{ github.sha }}
+            netizenom/monorepo-ws:latest
+            netizenom/monorepo-ws:${{ github.sha }}
